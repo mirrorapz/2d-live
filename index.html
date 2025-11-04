@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Myanmar 2D Live</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #101010; color: #fff; }
+    .box { margin: 50px auto; width: 250px; background: #222; padding: 20px; border-radius: 12px; }
+    .number { font-size: 2em; color: #00ffcc; }
+  </style>
+</head>
+<body>
+  <h2>🇲🇲 Myanmar 2D Live</h2>
+  <div class="box">
+    <p>Morning: <span id="morning">--</span></p>
+    <p>Evening: <span id="evening">--</span></p>
+    <p class="number" id="time">Loading...</p>
+  </div>
+
+  <script>
+    async function loadLive() {
+      try {
+        const res = await fetch("/api/live");
+        const data = await res.json();
+        document.getElementById("morning").textContent = data.morning;
+        document.getElementById("evening").textContent = data.evening;
+        document.getElementById("time").textContent = "Updated: " + data.time;
+      } catch {
+        document.getElementById("time").textContent = "Error loading data";
+      }
+    }
+
+    loadLive();
+    setInterval(loadLive, 5000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "2d-live",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vercel dev"
+  }
+}
